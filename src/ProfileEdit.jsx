@@ -26,6 +26,7 @@ function ProfileEdit() {
             }
           }
         );
+
         const savedData = await response.json();
         console.log("Saved user!", savedData);
       };
@@ -42,6 +43,16 @@ function ProfileEdit() {
       }
       loadUsers();
     }, []); // Passing [] so that it only runs the effect once
+
+    // Second useEffect hook for seperate purpose
+    // This hook updates title of document with user's username if it exists
+    useEffect(() => {
+      if (user.username) {
+        document.title = `${user.username} : Edit Profile`
+      } else {
+        document.title = "Edit Profile"
+      }
+    }, [user])
   
     if (user.id) {
       // `user.id` is truthy after the API call returns
