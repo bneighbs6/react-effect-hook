@@ -1,19 +1,34 @@
-function ProfileEdit() {
+import React, { useEffect, useState } from "react";
+
+function ProfileEdit({ userID }) {
   const [user, setUser] = useState({});
 
-  console.log("render", user);
   useEffect(() => {
-    console.log("useEffect");
-    async function loadUsers() {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users/1"
-      );
-      const userFromAPI = await response.json();
-      console.log("setUser", userFromAPI);
-      setUser(userFromAPI);
+    setUser({});
+    const abortController = new AbortController();
+  
+    async function loadUser() {
+      try {
+        const response = await fetch(
+          `https://jsonplaceholder.typicode.com/users/${userID}`,
+          { signal: abortController.signal }
+        );
+        const userFromAPI = await response.json();
+        setUser(userFromAPI);
+      } catch (error) {
+        if (error.name === "AbortError") {
+          // Ignore `AbortError`
+          console.log("Aborted", userID);
+        } else {
+          throw error;
+        }
+      }
     }
-    loadUsers();
-  }, []); // Passing [] so that it only runs the effect once
+  
+    loadUser();
+  
+    return () => abortController.abort();
+  }, [userID]);
 
   useEffect(() => {
     if (user.username) {
@@ -30,13 +45,10 @@ function ProfileEdit() {
   const submitHandler = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `https://jsonplaceholder.typicode.com/users/${user.id}`,
+      `https://jsonplaceholder.typicode.com/users/${userID}`,
       {
         method: "PUT",
         body: JSON.stringify(user),
-        headers: {
-          "Content-type": "application/json;charset=UTF-8"
-        }
       }
     );
     const savedData = await response.json();
@@ -46,31 +58,36 @@ function ProfileEdit() {
   if (user.id) {
     return (
       <form name="profileEdit" onSubmit={submitHandler}>
-        <div>
-          <label htmlFor="username">User Name:</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            required={true}
-            value={user.username}
-            onChange={changeHandler}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required={true}
-            value={user.email}
-            onChange={changeHandler}
-          />
-        </div>
-        <button type="submit">Save</button>
+        <fieldset>
+          <legend>API User ID: {user.id}</legend>
+          <div>
+            <label htmlFor="username">User Name:</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              required={true}
+              value={user.username}
+              onChange={changeHandler}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required={true}
+              value={user.email}
+              onChange={changeHandler}
+            />
+          </div>
+          <button type="submit">Save</button>
+        </fieldset>
       </form>
     );
   }
   return "Loading...";
 }
+
+export default ProfileEdit;
