@@ -49,6 +49,9 @@ function ProfileEdit({ userID }) {
       {
         method: "PUT",
         body: JSON.stringify(user),
+        headers: {
+          "Content-type": "application/json;charset=UTF-8"
+        }
       }
     );
     const savedData = await response.json();

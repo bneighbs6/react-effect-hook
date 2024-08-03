@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "../src/App.css";
 import ProfileEdit from "./ProfileEdit";
+import PostEdit from "./PostEdit";
 
 function App() {
   const [userId, setUserID] = useState(1);
+  const [postId, setPostId] = useState(1);
 
   const userIds = [1, 2, 3, 4];
+  const postIds = [1, 2, 3, 4];
 
   return (
     <div className="App">
@@ -16,6 +19,12 @@ function App() {
       ))}
       <h2>User ID {userId}</h2>
       <ProfileEdit userID={userId} />
+      {postIds.map((id) => (
+        <button key={id} onClick={() => setPostId(id)}>
+          Post ID {id}
+        </button>
+      ))}
+      <PostEdit userId={userId} />
     </div>
   );
 }
