@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../src/App.css";
 import ProfileEdit from "./ProfileEdit";
 import PostEdit from "./PostEdit";
-import { click } from "@testing-library/user-event/dist/click";
 
 function App() {
   const [userId, setUserID] = useState(1);
@@ -20,9 +19,9 @@ function App() {
       ))}
       <h2>User ID {userId}</h2>
       <ProfileEdit userID={userId} />
-      {postIds.map((clickedId) => (
-        <button key={clickedId} onClick={() => setPostId(clickedId)}>
-          Post ID {clickedId}
+      {postIds.map((id) => (
+        <button key={id} onClick={() => setPostId(id)}>
+          Post ID {id}
         </button>
       ))}
       <h2>Post Id {postId}</h2>

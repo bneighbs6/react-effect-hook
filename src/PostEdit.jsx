@@ -6,13 +6,13 @@ function PostEdit({ userId, postId }) {
   useEffect(() => {
     async function loadPosts() {
       const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${userId}`
+        `https://jsonplaceholder.typicode.com/posts/${postId}`
       );
       const postFromAPI = await response.json();
       setPost(postFromAPI);
     }
     loadPosts();
-  }, [userId]);
+  }, [postId]);
 
   const changeHandler = (e) => {
     setPost({ ...post, [e.target.name]: [e.target.value] })
@@ -21,7 +21,7 @@ function PostEdit({ userId, postId }) {
   const submitHandler = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${userId}`,
+      `https://jsonplaceholder.typicode.com/posts/${postId}`,
       {
         method: "PUT",
         body: JSON.stringify(post),
