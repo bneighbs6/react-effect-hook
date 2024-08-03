@@ -24,6 +24,7 @@ function App() {
           Post ID {id}
         </button>
       ))}
+      <h2>Post Id {postId}</h2>
       <PostEdit userId={userId} />
     </div>
   );
