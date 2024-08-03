@@ -73,6 +73,8 @@ function PostEdit({ postId }) {
         </form>
       </>
     );
+  } else {
+    return "Loading..."
   }
 }
 
