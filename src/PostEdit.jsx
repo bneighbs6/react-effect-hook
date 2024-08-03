@@ -36,32 +36,42 @@ function PostEdit({ postId }) {
 
   if (post) {
     return (
-      <form name="postEdit" onSubmit={submitHandler}>
-        <fieldset>
-          <legend>Post ID: {postId}</legend>
-          <div>
-            <label htmlFor="title">Post Title: </label>
-            <input
-              id="title"
-              name="title"
-              type="text"
-              onChange={changeHandler}
-              value={post.title}
-            />
-          </div>
-          <div>
-            <label htmlFor="body">Post Body: </label>
-            <input
-              id="body"
-              name="body"
-              type="text"
-              onChange={changeHandler}
-              value={post.body}
-            />
-          </div>
-          <button type="submit">Save Post</button>
-        </fieldset>
-      </form>
+      <>
+        <div>
+          <h4>Post Title:</h4>
+          <p>{post.title}</p>
+        </div>
+        <div>
+          <h4>Post Body:</h4>
+          <p>{post.body}</p>
+        </div>
+        <form name="postEdit" onSubmit={submitHandler}>
+          <fieldset>
+            <legend>Post ID: {postId}</legend>
+            <div>
+              <label htmlFor="title">Post Title: </label>
+              <input
+                id="title"
+                name="title"
+                type="text"
+                onChange={changeHandler}
+                value={post.title}
+              />
+            </div>
+            <div>
+              <label htmlFor="body">Post Body: </label>
+              <input
+                id="body"
+                name="body"
+                type="text"
+                onChange={changeHandler}
+                value={post.body}
+              />
+            </div>
+            <button type="submit">Save Post</button>
+          </fieldset>
+        </form>
+      </>
     );
   }
 }
