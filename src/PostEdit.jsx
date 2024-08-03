@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function PostEdit({ userId, postId }) {
+function PostEdit({ postId }) {
   const [post, setPost] = useState({});
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function PostEdit({ userId, postId }) {
     return (
       <form name="postEdit" onSubmit={submitHandler}>
         <fieldset>
-          <legend>Posts for User ID: {post.userId} Post ID: {postId}</legend>
+          <legend>Post ID: {postId}</legend>
           <div>
             <label htmlFor="title">Post Title: </label>
             <input
