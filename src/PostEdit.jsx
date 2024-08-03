@@ -36,11 +36,11 @@ function PostEdit({ userId }) {
 
   if (post) {
     return (
-      <form onSubmit={submitHandler}>
+      <form name="postEdit" onSubmit={submitHandler}>
         <fieldset>
-          <legend>Posts for UserId: {post.userId}</legend>
+          <legend>Posts for User ID: {post.userId} Post ID: {post.id}</legend>
           <div>
-            <label htmlFor="title">Post Title</label>
+            <label htmlFor="title">Post Title: </label>
             <input
               id="title"
               name="title"
@@ -50,7 +50,7 @@ function PostEdit({ userId }) {
             />
           </div>
           <div>
-            <label htmlFor="body">Post Body</label>
+            <label htmlFor="body">Post Body: </label>
             <input
               id="body"
               name="body"

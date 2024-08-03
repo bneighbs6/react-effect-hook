@@ -64,7 +64,7 @@ function ProfileEdit({ userID }) {
         <fieldset>
           <legend>API User ID: {user.id}</legend>
           <div>
-            <label htmlFor="username">User Name:</label>
+            <label htmlFor="username">User Name: </label>
             <input
               id="username"
               name="username"
@@ -75,7 +75,7 @@ function ProfileEdit({ userID }) {
             />
           </div>
           <div>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Email: </label>
             <input
               id="email"
               name="email"
